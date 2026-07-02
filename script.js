@@ -148,71 +148,71 @@ document.addEventListener("DOMContentLoaded", () => {
   // }
 
   //////////////////NEW n8n FORM///////////////////
-  const form = document.getElementById("leadForm");
-  const webhookUrl = "https://ai-agent.gwebit.com/webhook-test/66c4bd21-9db1-4f3e-88f9-314721dcab3a";
+  // const form = document.getElementById("leadForm");
+  // const webhookUrl = "https://ai-agent.gwebit.com/webhook-test/66c4bd21-9db1-4f3e-88f9-314721dcab3a";
 
-  if (form) {
-    form.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      console.log("Form submitted - starting process...");
+  // if (form) {
+  //   form.addEventListener("submit", async (e) => {
+  //     e.preventDefault();
+  //     console.log("Form submitted - starting process...");
 
-      const nameInput = form.querySelector('input[name="fullName"]');
-      const emailInput = form.querySelector('input[name="email"]');
-      const phoneInput = form.querySelector('input[name="phone"]');
+  //     const nameInput = form.querySelector('input[name="fullName"]');
+  //     const emailInput = form.querySelector('input[name="email"]');
+  //     const phoneInput = form.querySelector('input[name="phone"]');
 
-      if (!nameInput.value.trim() || !emailInput.value.trim()) {
-        alert("Name and email are required.");
-        return;
-      }
+  //     if (!nameInput.value.trim() || !emailInput.value.trim()) {
+  //       alert("Name and email are required.");
+  //       return;
+  //     }
 
-      const formData = {
-        fullName: nameInput.value.trim(),
-        email: emailInput.value.trim(),
-        phone: phoneInput?.value.trim() || "",
-        source: "website",
-        timestamp: new Date().toISOString(),
-      };
+  //     const formData = {
+  //       fullName: nameInput.value.trim(),
+  //       email: emailInput.value.trim(),
+  //       phone: phoneInput?.value.trim() || "",
+  //       source: "website",
+  //       timestamp: new Date().toISOString(),
+  //     };
 
-      console.log("Sending data:", formData);
+  //     console.log("Sending data:", formData);
 
-      try {
-        const button = form.querySelector("button");
-        const originalText = button.textContent;
-        button.disabled = true;
-        button.textContent = "Sending...";
+  //     try {
+  //       const button = form.querySelector("button");
+  //       const originalText = button.textContent;
+  //       button.disabled = true;
+  //       button.textContent = "Sending...";
 
-        const response = await fetch(webhookUrl, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
+  //       const response = await fetch(webhookUrl, {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify(formData),
+  //       });
 
-        console.log("Response status:", response.status);
+  //       console.log("Response status:", response.status);
 
-        if (response.ok) {
-          console.log("✅ Success!");
-          // Show success message
-          let success = document.querySelector(".success-message") || document.createElement("div");
-          success.className = "success-message";
-          success.style.display = "block";
-          success.innerHTML = "🎉 Thank you! Your guide is on the way.";
-          form.appendChild(success);
-          form.reset();
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-      } catch (error) {
-        console.error("❌ Fetch error:", error);
-        alert("Failed to send data. Check console for details.");
-      } finally {
-        const button = form.querySelector("button");
-        button.disabled = false;
-        button.textContent = "Send Me The FREE Guide";
-      }
-    });
-  }
+  //       if (response.ok) {
+  //         console.log("✅ Success!");
+  //         // Show success message
+  //         let success = document.querySelector(".success-message") || document.createElement("div");
+  //         success.className = "success-message";
+  //         success.style.display = "block";
+  //         success.innerHTML = "🎉 Thank you! Your guide is on the way.";
+  //         form.appendChild(success);
+  //         form.reset();
+  //       } else {
+  //         throw new Error(`HTTP error! status: ${response.status}`);
+  //       }
+  //     } catch (error) {
+  //       console.error("❌ Fetch error:", error);
+  //       alert("Failed to send data. Check console for details.");
+  //     } finally {
+  //       const button = form.querySelector("button");
+  //       button.disabled = false;
+  //       button.textContent = "Send Me The FREE Guide";
+  //     }
+  //   });
+  // }
 
   //
   /* ===========================
