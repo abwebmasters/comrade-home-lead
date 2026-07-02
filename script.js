@@ -83,32 +83,29 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ===========================
-       Form Validation
-    =========================== */
+   Form Validation + n8n Webhook
+=========================== */
 
   const form = document.getElementById("leadForm");
 
   if (form) {
-    form.addEventListener("submit", (e) => {
+    form.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const name = form.querySelector('input[type="text"]');
+      const name = form.querySelector('input[name="name"]');
+      const email = form.querySelector('input[name="email"]');
+      const phone = form.querySelector('input[name="phone"]');
 
-      const email = form.querySelector('input[type="email"]');
-
+      // Validation
       if (name.value.trim() === "") {
         alert("Please enter your full name.");
-
         name.focus();
-
         return;
       }
 
       if (email.value.trim() === "") {
         alert("Please enter your email.");
-
         email.focus();
-
         return;
       }
 
@@ -116,35 +113,126 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (!emailPattern.test(email.value)) {
         alert("Please enter a valid email address.");
-
         email.focus();
-
         return;
       }
 
-      let success = document.querySelector(".success-message");
+      const submitBtn = form.querySelector("button");
 
-      if (!success) {
-        success = document.createElement("div");
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = "Sending...";
 
-        success.className = "success-message";
+      try {
+        const response = await fetch("https://ai-agent.gwebit.com/webhook-test/66c4bd21-9db1-4f3e-88f9-314721dcab3a", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: name.value.trim(),
+            email: email.value.trim(),
+            phone: phone.value.trim(),
+            source: "Landing Page",
+            leadMagnet: "Free Land Buying Guide",
+            submittedAt: new Date().toISOString(),
+          }),
+        });
 
-        form.appendChild(success);
+        if (!response.ok) {
+          throw new Error("Submission failed.");
+        }
+
+        let success = document.querySelector(".success-message");
+
+        if (!success) {
+          success = document.createElement("div");
+          success.className = "success-message";
+          form.appendChild(success);
+        }
+
+        success.style.display = "block";
+        success.innerHTML = "🎉 Thank you! Please check your email for your FREE Property Buying Guide.";
+
+        form.reset();
+
+        success.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      } catch (error) {
+        alert("Sorry, something went wrong. Please try again.");
+        console.error(error);
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = "Send Me The FREE Guide";
       }
-
-      success.style.display = "block";
-
-      success.innerHTML = "🎉 Thank you! Your FREE Property Buying Guide is on its way to your email.";
-
-      form.reset();
-
-      success.scrollIntoView({
-        behavior: "smooth",
-
-        block: "center",
-      });
     });
   }
+
+  // ================= OLD FORM ===================
+  /* ===========================
+       Form Validation
+    =========================== */
+
+  // const form = document.getElementById("leadForm");
+
+  // if (form) {
+  //   form.addEventListener("submit", (e) => {
+  //     e.preventDefault();
+
+  //     const name = form.querySelector('input[type="text"]');
+
+  //     const email = form.querySelector('input[type="email"]');
+
+  //     if (name.value.trim() === "") {
+  //       alert("Please enter your full name.");
+
+  //       name.focus();
+
+  //       return;
+  //     }
+
+  //     if (email.value.trim() === "") {
+  //       alert("Please enter your email.");
+
+  //       email.focus();
+
+  //       return;
+  //     }
+
+  //     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  //     if (!emailPattern.test(email.value)) {
+  //       alert("Please enter a valid email address.");
+
+  //       email.focus();
+
+  //       return;
+  //     }
+
+  //     let success = document.querySelector(".success-message");
+
+  //     if (!success) {
+  //       success = document.createElement("div");
+
+  //       success.className = "success-message";
+
+  //       form.appendChild(success);
+  //     }
+
+  //     success.style.display = "block";
+
+  //     success.innerHTML = "🎉 Thank you! Your FREE Property Buying Guide is on its way to your email.";
+
+  //     form.reset();
+
+  //     success.scrollIntoView({
+  //       behavior: "smooth",
+
+  //       block: "center",
+  //     });
+  //   });
+  // }
 
   /* ===========================
        Button Ripple Effect
@@ -273,7 +361,7 @@ document.addEventListener("DOMContentLoaded", () => {
       behavior: "smooth",
     });
   });
-});
+};);
 
 /* ===========================
    Ripple Animation
