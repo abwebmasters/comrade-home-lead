@@ -147,50 +147,37 @@ document.addEventListener("DOMContentLoaded", () => {
   //   });
   // }
 
+  //////////////////NEW n8n FORM///////////////////
   const form = document.getElementById("leadForm");
   const webhookUrl = "https://ai-agent.gwebit.com/webhook-test/66c4bd21-9db1-4f3e-88f9-314721dcab3a";
 
   if (form) {
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
+      console.log("Form submitted - starting process...");
 
       const nameInput = form.querySelector('input[name="fullName"]');
       const emailInput = form.querySelector('input[name="email"]');
       const phoneInput = form.querySelector('input[name="phone"]');
 
-      // Validation
-      if (!nameInput.value.trim()) {
-        alert("Please enter your full name.");
-        nameInput.focus();
+      if (!nameInput.value.trim() || !emailInput.value.trim()) {
+        alert("Name and email are required.");
         return;
       }
 
-      if (!emailInput.value.trim()) {
-        alert("Please enter your email.");
-        emailInput.focus();
-        return;
-      }
-
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailPattern.test(emailInput.value)) {
-        alert("Please enter a valid email address.");
-        emailInput.focus();
-        return;
-      }
-
-      // Prepare data
       const formData = {
         fullName: nameInput.value.trim(),
         email: emailInput.value.trim(),
-        phone: phoneInput ? phoneInput.value.trim() : "",
+        phone: phoneInput?.value.trim() || "",
+        source: "website",
         timestamp: new Date().toISOString(),
-        // Add any other fields you want
       };
 
+      console.log("Sending data:", formData);
+
       try {
-        // Show loading state on button
         const button = form.querySelector("button");
-        const originalButtonText = button.textContent;
+        const originalText = button.textContent;
         button.disabled = true;
         button.textContent = "Sending...";
 
@@ -202,27 +189,24 @@ document.addEventListener("DOMContentLoaded", () => {
           body: JSON.stringify(formData),
         });
 
-        if (response.ok) {
-          // Success message
-          let success = document.querySelector(".success-message");
-          if (!success) {
-            success = document.createElement("div");
-            success.className = "success-message";
-            form.appendChild(success);
-          }
-          success.style.display = "block";
-          success.innerHTML = "🎉 Thank you! Your FREE Property Buying Guide is on its way to your email.";
+        console.log("Response status:", response.status);
 
+        if (response.ok) {
+          console.log("✅ Success!");
+          // Show success message
+          let success = document.querySelector(".success-message") || document.createElement("div");
+          success.className = "success-message";
+          success.style.display = "block";
+          success.innerHTML = "🎉 Thank you! Your guide is on the way.";
+          form.appendChild(success);
           form.reset();
-          success.scrollIntoView({ behavior: "smooth", block: "center" });
         } else {
-          throw new Error("Webhook response not OK");
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
       } catch (error) {
-        console.error("Error sending form:", error);
-        alert("There was an error sending your information. Please try again.");
+        console.error("❌ Fetch error:", error);
+        alert("Failed to send data. Check console for details.");
       } finally {
-        // Reset button
         const button = form.querySelector("button");
         button.disabled = false;
         button.textContent = "Send Me The FREE Guide";
