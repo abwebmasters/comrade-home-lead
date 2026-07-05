@@ -31,12 +31,19 @@ form.addEventListener("submit", async (e) => {
     button.textContent = "Sending...";
 
     // Updated fetch block to force cross-origin delivery
-    await fetch(webhookUrl, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+    // Parse the string inside body back into a clean JSON object
+    const rawBodyString = $input.item.json.body;
+    const parsedData = JSON.parse(rawBodyString);
+
+    return {
+      json: parsedData,
+    };
+    // await fetch(webhookUrl, {
+    //   method: "POST",
+    //   mode: "no-cors",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(payload),
+    // });
 
     console.log("✅ Sent!");
     alert("🎉 Thank you! Your FREE Guide is on its way.");
