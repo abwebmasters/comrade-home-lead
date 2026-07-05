@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // === FORM SUBMISSION SCRIPT ===
   const form = document.getElementById("leadForm");
-  const webhookUrl = "https://ai-agent.gwebit.com/webhook/66c4bd21-9db1-4f3e-88f9-314721dcab3a";
+  const webhookUrl = "https://ai-agent.gwebit.com/webhook-test/920691de-b312-4c8f-a663-a2f8634ecab0";
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
