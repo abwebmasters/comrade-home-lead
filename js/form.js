@@ -31,13 +31,13 @@ form.addEventListener("submit", async (e) => {
     button.textContent = "Sending...";
 
     // Updated fetch block to force cross-origin delivery
-    // Parse the string inside body back into a clean JSON object
-    const rawBodyString = $input.item.json.body;
-    const parsedData = JSON.parse(rawBodyString);
-
-    return {
-      json: parsedData,
-    };
+    // Replace the fetch block in your website code with this:
+    await fetch(webhookUrl, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(payload), // <-- This changes it to clean form variables
+    });
     // await fetch(webhookUrl, {
     //   method: "POST",
     //   mode: "no-cors",
