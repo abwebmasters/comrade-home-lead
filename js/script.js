@@ -86,65 +86,65 @@ document.addEventListener("DOMContentLoaded", () => {
        Form Validation
     =========================== */
 
-  const form = document.getElementById("leadForm");
+  // const form = document.getElementById("leadForm");
 
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+  // if (form) {
+  //   form.addEventListener("submit", (e) => {
+  //     e.preventDefault();
 
-      const name = form.querySelector('input[type="text"]');
+  //     const name = form.querySelector('input[type="text"]');
 
-      const email = form.querySelector('input[type="email"]');
+  //     const email = form.querySelector('input[type="email"]');
 
-      if (name.value.trim() === "") {
-        alert("Please enter your full name.");
+  //     if (name.value.trim() === "") {
+  //       alert("Please enter your full name.");
 
-        name.focus();
+  //       name.focus();
 
-        return;
-      }
+  //       return;
+  //     }
 
-      if (email.value.trim() === "") {
-        alert("Please enter your email.");
+  //     if (email.value.trim() === "") {
+  //       alert("Please enter your email.");
 
-        email.focus();
+  //       email.focus();
 
-        return;
-      }
+  //       return;
+  //     }
 
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  //     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      if (!emailPattern.test(email.value)) {
-        alert("Please enter a valid email address.");
+  //     if (!emailPattern.test(email.value)) {
+  //       alert("Please enter a valid email address.");
 
-        email.focus();
+  //       email.focus();
 
-        return;
-      }
+  //       return;
+  //     }
 
-      let success = document.querySelector(".success-message");
+  //     let success = document.querySelector(".success-message");
 
-      if (!success) {
-        success = document.createElement("div");
+  //     if (!success) {
+  //       success = document.createElement("div");
 
-        success.className = "success-message";
+  //       success.className = "success-message";
 
-        form.appendChild(success);
-      }
+  //       form.appendChild(success);
+  //     }
 
-      success.style.display = "block";
+  //     success.style.display = "block";
 
-      success.innerHTML = "🎉 Thank you! Your FREE Property Buying Guide is on its way to your email.";
+  //     success.innerHTML = "🎉 Thank you! Your FREE Property Buying Guide is on its way to your email.";
 
-      form.reset();
+  //     form.reset();
 
-      success.scrollIntoView({
-        behavior: "smooth",
+  //     success.scrollIntoView({
+  //       behavior: "smooth",
 
-        block: "center",
-      });
-    });
-  }
+  //       block: "center",
+  //     });
+  //   });
+  // }
 
   /* ===========================
        Button Ripple Effect
