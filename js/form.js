@@ -1,5 +1,5 @@
 const form = document.getElementById("leadForm");
-const webhookUrl = "https://ai-agent.gwebit.com/webhook-test/920691de-b312-4c8f-a663-a2f8634ecab0";
+const webhookUrl = "https://comrade-villa.app.n8n.cloud/webhook-test/3c053f7b-7f05-4cc3-84a7-0fb1c3bba073";
 
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -31,6 +31,14 @@ form.addEventListener("submit", async (e) => {
     button.textContent = "Sending...";
 
     // Updated fetch block to force cross-origin delivery
+
+    // await fetch(webhookUrl, {
+    //   method: "POST",
+    //   mode: "no-cors",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(payload),
+    // });
+
     // Replace the fetch block in your website code with this:
     await fetch(webhookUrl, {
       method: "POST",
@@ -38,12 +46,6 @@ form.addEventListener("submit", async (e) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams(payload), // <-- This changes it to clean form variables
     });
-    // await fetch(webhookUrl, {
-    //   method: "POST",
-    //   mode: "no-cors",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // });
 
     console.log("✅ Sent!");
     alert("🎉 Thank you! Your FREE Guide is on its way.");
