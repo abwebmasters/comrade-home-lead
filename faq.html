@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Frequently Asked Questions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600&amp;display=swap");
+
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+      }
+
+      .faq-question {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .faq-item.open .faq-answer {
+        max-height: 200px;
+      }
+
+      .faq-item.open .faq-question {
+        background-color: #f8fafc;
+      }
+
+      .hero-bg {
+        background: linear-gradient(135deg, #0f172a 0%, #1e2937 100%);
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <!-- Header -->
+    <div class="hero-bg text-white py-12">
+      <div class="max-w-2xl mx-auto px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-semibold tracking-tight mb-3">Frequently Asked Questions</h1>
+        <p class="text-slate-300 text-lg">Everything you need to know</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-2xl mx-auto px-6 py-12">
+      <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+        <!-- FAQ Items -->
+        <div class="divide-y divide-slate-100">
+          <!-- FAQ 1 -->
+          <div class="faq-item px-8 py-6 cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center faq-question rounded-2xl px-6 py-4">
+              <h3 class="text-lg font-medium text-slate-800">Is this guide free?</h3>
+              <i class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+            </div>
+            <div class="faq-answer px-6 mt-2 text-slate-600 leading-relaxed">Yes. It is completely free.</div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="faq-item px-8 py-6 cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center faq-question rounded-2xl px-6 py-4">
+              <h3 class="text-lg font-medium text-slate-800">Will you spam me?</h3>
+              <i class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+            </div>
+            <div class="faq-answer px-6 mt-2 text-slate-600 leading-relaxed">
+              No. You'll only receive useful property tips.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="faq-item px-8 py-6 cursor-pointer" onclick="toggleFaq(this)">
+            <div class="flex justify-between items-center faq-question rounded-2xl px-6 py-4">
+              <h3 class="text-lg font-medium text-slate-800">Can I unsubscribe?</h3>
+              <i class="fas fa-chevron-down text-slate-400 transition-transform duration-300"></i>
+            </div>
+            <div class="faq-answer px-6 mt-2 text-slate-600 leading-relaxed">Yes, anytime.</div>
+          </div>
+        </div>
+
+        <!-- Footer note -->
+        <div class="px-8 py-8 text-center border-t border-slate-100">
+          <p class="text-sm text-slate-500">
+            Still have questions?
+            <a
+              href="#"
+              onclick="alert('Contact form would open here in a real version!')"
+              class="text-blue-600 hover:text-blue-700 font-medium"
+            >
+              Get in touch
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Additional info -->
+      <div class="text-center mt-10">
+        <p class="text-slate-400 text-xs">© 2026 Property Guide • Made with ❤️</p>
+      </div>
+    </div>
+
+    <script>
+      function toggleFaq(element) {
+        const isOpen = element.classList.contains("open");
+
+        // Close all other FAQs
+        document.querySelectorAll(".faq-item").forEach((item) => {
+          item.classList.remove("open");
+          const icon = item.querySelector("i");
+          if (icon) icon.style.transform = "rotate(0deg)";
+        });
+
+        // Open clicked one if it wasn't open
+        if (!isOpen) {
+          element.classList.add("open");
+          const icon = element.querySelector("i");
+          if (icon) icon.style.transform = "rotate(180deg)";
+        }
+      }
+
+      // Tailwind script already loaded via CDN
+      console.log("%c✅ FAQ Page Ready - Fully Mobile Friendly", "color: #10b981; font-size: 14px; font-weight: 500;");
+
+      // Auto-open first FAQ
+      window.onload = function () {
+        const firstFaq = document.querySelector(".faq-item");
+        if (firstFaq) {
+          firstFaq.classList.add("open");
+          const icon = firstFaq.querySelector("i");
+          if (icon) icon.style.transform = "rotate(180deg)";
+        }
+      };
+    </script>
+  </body>
+</html>

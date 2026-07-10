@@ -1,5 +1,5 @@
 /* ==========================================
-   PrimeLand Realty Landing Page
+   Comrade Villa Landing Page
    script.js
 ========================================== */
 
@@ -16,14 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
       faqItems.forEach((faq) => {
         if (faq !== item) {
-          faq.classList.remove("active");
+          faq.classList.remove("faq-active");
         }
       });
 
-      item.classList.toggle("active");
+      item.classList.toggle("faq-active");
     });
   });
-
   /* ===========================
        Smooth Scroll
     =========================== */
