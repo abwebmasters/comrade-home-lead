@@ -10,8 +10,9 @@ form.addEventListener("submit", async (e) => {
   const email = form.querySelector('[name="email"]').value.trim();
   const phone = form.querySelector('[name="phone"]').value.trim();
   const interest = form.querySelector('[name="interest"]').value;
+  const location = form.querySelector('[name="location"]').value;
 
-  if (!fullName || !email || !interest) {
+  if (!fullName || !email || !interest || !location) {
     alert("Please complete all required fields!");
     return;
   }
@@ -21,8 +22,9 @@ form.addEventListener("submit", async (e) => {
     email,
     phone,
     interest,
+    location,
     timestamp: new Date().toISOString(),
-    source: "website-optin",
+    source: "landing page optin",
   };
 
   console.log("📤 Sending payload:", payload);
