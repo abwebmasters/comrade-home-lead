@@ -198,9 +198,23 @@
 
           <form id="leadForm">
             <input type="text" name="fullName" placeholder="Full Name" required />
+
             <input type="email" name="email" placeholder="Email Address" required />
+
             <input type="tel" name="phone" placeholder="Phone Number" />
+
+            <select name="interest" required>
+              <option value="" selected disabled>What best describes your interest?</option>
+              <option value="Actively looking to buy property">I'm actively looking to buy property</option>
+              <option value="Planning to buy within the next 12 months">
+                I'm planning to buy within the next 12 months
+              </option>
+              <option value="Investing in real estate">I'm investing in real estate</option>
+              <option value="Just exploring">I'm just exploring</option>
+            </select>
+
             <button type="submit">Send Me The FREE Guide</button>
+
             <p class="privacy">🔒 We respect your privacy. No spam. Ever.</p>
           </form>
         </div>
