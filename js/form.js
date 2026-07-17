@@ -44,7 +44,10 @@ form.addEventListener("submit", async (e) => {
     });
 
     console.log("✅ Sent!");
-    alert("🎉 Thank you! Your FREE Guide is on its way.");
+    // alert("🎉 Thank you! Your FREE Guide is on its way.");
+    // Redirect to Thank You page
+    window.location.href = "thankyou-page.html";
+
     form.reset();
   } catch (err) {
     console.error("❌ Error:", err);
