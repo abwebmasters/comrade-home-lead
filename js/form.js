@@ -1,5 +1,5 @@
 const form = document.getElementById("leadForm");
-const webhookUrl = "https://comrade-villa.app.n8n.cloud/webhook/3c053f7b-7f05-4cc3-84a7-0fb1c3bba073";
+const webhookUrl = "https://comrade-villa-new.app.n8n.cloud/webhook-test/3c053f7b-7f05-4cc3-84a7-0fb1c3bba073";
 
 // https://comrade-villa.app.n8n.cloud/webhook/3c053f7b-7f05-4cc3-84a7-0fb1c3bba073
 
